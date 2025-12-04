@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
-
+import SwiftData
 @main
 struct rrApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NotesApp()
+                .modelContainer(for:Listt.self)
         }
     }
 }

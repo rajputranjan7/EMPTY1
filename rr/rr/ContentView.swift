@@ -6,15 +6,44 @@
 //
 
 import SwiftUI
-
-struct ContentView: View {
+import SwiftData
+struct NotesApp: View {
+    
+//    Used to perform CRUD operations
+    @Environment(\.modelContext)
+    private var modelContext
+    @Query private var Lists: [Listt]
     var body: some View {
-        VStack {
+        NavigationStack{
+            List{
+                    ForEach(Lists) {
+                        Lists in
+                    Text(Lists.title)
+                               }
+            }
+            .navigationTitle("My list")
+            .toolbar{
+                ToolbarItem(placement:.topBarTrailing){
+                    Button{
+                        
+                    }label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+            .overlay{
+                if Lists.isEmpty{
+                    ContentUnavailableView("My lists are not available",
+                        systemImage: "heart.circle",
+                         description:Text("No List yest, Add one to get Start"))
+                    
+                }
+            }
         }
-        .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    NotesApp()
 }
+
